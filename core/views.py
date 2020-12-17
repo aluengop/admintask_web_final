@@ -81,13 +81,13 @@ def login(request):
 
         if len(lista) > 0:
             if rol == 1: 
-                username='admin'
+                username='Admin'
                 password='admin'
             elif rol == 2:
-                username='diseñador de proceso'
+                username='Diseñador de proceso'
                 password='admin'
             else:
-                username='funcionario'
+                username='Funcionario'
                 password='admin'
             # Verificamos las credenciales del usuario
             user = authenticate(username=username, password=password)

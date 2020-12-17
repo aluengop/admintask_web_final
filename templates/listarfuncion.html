@@ -20,11 +20,16 @@
           <tr>
               <th>NOMBRE</th>
               <th>FECHA INICIO</th>
-              <th>FECHA TERMINO</th>
+              <th>FECHA TÉRMINO</th>
               <th>UNIDAD</th>
               <th>ESTADO</th>
               <th>USUARIO</th>
+              {% if user.is_authenticated %}
+              {% if user.is_rol != 3 %}
               <th>EDITAR</th>
+              <th>BORRAR</th>
+              {% endif %}
+              {% endif %}
               
           </tr>
       
@@ -36,6 +41,8 @@
                   <td>{{ funcion.7 }}</td>
                   <td>{{ funcion.8 }}</td>
                   <td>{{ funcion.9 }}</td>
+                  {% if user.is_authenticated %}
+                  {% if user.is_rol != 3 %}
                   <td align="center">
                       <a href="{% url 'editar_funcion' funcion.0 %}" class="btn btn-success">Editar</a>
                       
@@ -44,6 +51,8 @@
                     <a class="btn btn-danger" 
                     href="{% url 'borrar_funcion' funcion.0 %}">Borrar</a>
                 </td>
+                  {% endif %}
+                  {% endif %}
                   
       
                    

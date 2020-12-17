@@ -12,6 +12,10 @@ from django.views import generic
 from django.db import connection
 from django.db.models import Q
 import cx_Oracle
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+
+
 # Create your views here.
 
 def listar_unidad():
@@ -91,10 +95,13 @@ def funcion(request):
         
         if salida == 1 :
             data['mensaje'] = 'agregado correctamente'
+            messages.info(request, "Operación Exitosa!")
         elif salida == 2 :
             data['mensaje'] = 'Las fecha termino no puede ser antes que la fecha de inicio'
+            messages.info(request, "Las fecha termino no puede ser antes que la fecha de inicio!")
         else:
             data['mensaje'] = 'no se ha podido guardar'
+            messages.info(request, "No se ha podido guardar!")
 
     return render(request, 'agregarfuncion.html',data)
 
@@ -137,8 +144,10 @@ def editarfuncion(request, id_funcion):
         
         if salida == 1 :
             data['mensaje'] = 'funcion %s editado correctamente'%id_funcion
+            messages.info(request, "Operación Exitosa!")
         else:
             data['mensaje'] = 'No se ha podido Editar el funcion '+str(id_funcion)
+            messages.info(request, "Operación Fallida!")
 
     return render(request, 'editarfuncion.html', data)
 
@@ -162,8 +171,10 @@ def eliminarFunciones(request, id_funcion):
         salida = eliminarFuncion(id_funcion)
         if salida == 1 :
             data['mensaje'] = 'Funcion %s eliminada correctamente'%id_funcion
+            messages.info(request, "Operación Exitosa!")
         else:
             data['mensaje'] = 'No se ha podido eliminar la funcion'+str(id_funcion)
+            messages.info(request, "Operación Fallida!")
 
     return render(request,'borrarfuncion.html',data)
 

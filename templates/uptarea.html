@@ -4,51 +4,53 @@
 
 {% block content %}
 
-    <div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
-        <br>
-        <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Editar Tarea</h1>
-      
-          <div id="content-centro" > 
-            <form action="" method="POST">
-                {% csrf_token %}
-                <br>
-                <label for="">Nombre</label><br>
-                <input type="text" name="nombre" value="{{tarea.1}}" size="20" style="width:250px;">
-                <br></br>
-                <label for="">Fecha de Inicio</label><br>
-                <input type="date" name="fecha_inicio" style="width:250px;" value="{{fecha_inicio_str}}" autocomplete="on">
-                <br></br>
-                <label for="">Fecha de Termino</label><br>
-                <input type="date" name="fecha_termino" style="width:250px;" value="{{fecha_termino_str}}" autocomplete="on">
-                <br></br>
-                <label for="">Estado</label><br>
-                <select name="Estado" id="DESCRIPCION" style="width:250px;">
-                    <option value="1">seleccionar</option>
-                    {% for p in id_estado %}
-                        {% if p.0 == tarea.4 %}
-                            <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
-                        {% else %}
-                            <option value="{{p.0}}">{{ p.1 }}</option> 
-                        {% endif %}   
-                    {% endfor %}
-                </select>
-                <br></br>
-                <label for="">Funcion</label><br>
-                <select name="funcion_id_funcion" id="funcion_id_funcion" style="width:250px;">
-                    <option value="1">seleccionar</option>
-                    {% for p in id_funcion %}
-                        {% if p.0 == tarea.5 %}
-                            <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
-                        {% else %}
-                            <option value="{{p.0}}">{{ p.1 }}</option> 
-                        {% endif %}    
-                    {% endfor %}
-                </select>
-                <br></br>
-                <label for="">Descripción</label><br>
-                <input type="text" name="nombre" value="{{tarea.6}}" size="20" style="width:250px;">
-                <br></br>
-                <!--
+<div class="container"
+    style="background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+    <br>
+    <h1 style="font-family: Helvetica; color:darkslategray; text-align: center; ">Editar Tarea</h1>
+
+    <div id="content-centro">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <br>
+            <label for="">Nombre</label><br>
+            <input type="text" name="nombre" value="{{tarea.1}}" size="20" style="width:250px;">
+            <br></br>
+            <label for="">Fecha de Inicio</label><br>
+            <input type="date" name="fecha_inicio" style="width:250px;" value="{{fecha_inicio_str}}" autocomplete="on">
+            <br></br>
+            <label for="">Fecha de Termino</label><br>
+            <input type="date" name="fecha_termino" style="width:250px;" value="{{fecha_termino_str}}"
+                autocomplete="on">
+            <br></br>
+            <label for="">Estado</label><br>
+            <select name="Estado" id="DESCRIPCION" style="width:250px;">
+                <option value="1">seleccionar</option>
+                {% for p in id_estado %}
+                {% if p.0 == tarea.4 %}
+                <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
+                {% else %}
+                <option value="{{p.0}}">{{ p.1 }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <br></br>
+            <label for="">Funcion</label><br>
+            <select name="funcion_id_funcion" id="funcion_id_funcion" style="width:250px;">
+                <option value="1">seleccionar</option>
+                {% for p in id_funcion %}
+                {% if p.0 == tarea.5 %}
+                <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
+                {% else %}
+                <option value="{{p.0}}">{{ p.1 }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <br></br>
+            <label for="">Descripción</label><br>
+            <input type="text" name="nombre" value="{{tarea.6}}" size="20" style="width:250px;">
+            <br></br>
+            <!--
                 <label for="">Usuarios</label><br>
                 <select name="id_usuario" id="DESCRIPCION" style="width:250px;" required>
                     <option value="">Seleccionar</option>
@@ -64,25 +66,37 @@
                     {% endfor %}
                 </select><br></br>
                 -->
-                <label for="">Encargado</label><br>
-                <select name="id_encargado" id="DESCRIPCION3" style="width:250px;" required>
-                    <option value="">Seleccionar</option>
-                    {% for encargado in lista_encargado %}
-                        {% if encargado.0 == tarea.7 %}
-                            <option selected="true" value="{{encargado.0}}">{{ encargado.1 }}</option>
-                        {% else %}
-                            <option value="{{encargado.0}}">{{ encargado.1 }}</option> 
-                        {% endif %}  
-                    {% endfor %}
-                </select><br></br>
-        
-                <button type="submit" class="btn btn-primary" style="width:250px;">Guardar</button>
-                
-                <br></br>
-                {{mensaje}}  
-                <br></br>
-            </form>           
-          </div>
-        </div>
-      </div>  
+            <label for="">Encargado</label><br>
+            <select name="id_encargado" id="DESCRIPCION3" style="width:250px;" required>
+                <option value="">Seleccionar</option>
+                {% for encargado in lista_encargado %}
+                {% if encargado.0 == tarea.7 %}
+                <option selected="true" value="{{encargado.0}}">{{ encargado.1 }}</option>
+                {% else %}
+                <option value="{{encargado.0}}">{{ encargado.1 }}</option>
+                {% endif %}
+                {% endfor %}
+            </select><br></br>
+
+            <button type="submit" class="btn btn-primary" style="width:250px;">Guardar</button>
+
+            <br></br>
+            {{mensaje}}
+            <br></br>
+        </form>
+    </div>
+</div>
+
+
+<!--Mensaje de información de operación-->
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>
+    alert("{{ message }}");
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
 {% endblock %}

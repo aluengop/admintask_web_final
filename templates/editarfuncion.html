@@ -4,16 +4,17 @@
 
 {% block content %}
 
-<div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+<div class="container"
+    style="background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
     <br>
-    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Editar Función</h1>
-  
-      <div id="content-centro" > 
+    <h1 style="font-family: Helvetica; color:darkslategray; text-align: center; ">Editar Función</h1>
+
+    <div id="content-centro">
 
         <form action="" method="POST">
             {% csrf_token %}
             <br>
-          
+
             <br>
             <label for="">Nombre</label><br>
             <input type="text" name="nombre" value="{{funcion.1}}" size="20" style="width:250px;">
@@ -22,19 +23,20 @@
             <input type="date" name="fecha_inicio" style="width:250px;" value="{{fecha_inicio_str}}" autocomplete="on">
             <br>
             <label for="">Fecha de Término</label><br>
-            <input type="date" name="fecha_termino" style="width:250px;" value="{{fecha_termino_str}}" autocomplete="on">
+            <input type="date" name="fecha_termino" style="width:250px;" value="{{fecha_termino_str}}"
+                autocomplete="on">
             <br>
             <label for="">Unidad</label><br>
             <select name="Unidad" id="DEPARTAMENTO" style="width:250px;">
                 <option value="1">seleccionar</option>
                 {% for p in id_unidad %}
 
-                    {% if p.0 == funcion.4 %}
-                        <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
-                    {% else %}
-                        <option value="{{p.0}}">{{ p.1 }}</option> 
-                    {% endif %}
-  
+                {% if p.0 == funcion.4 %}
+                <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
+                {% else %}
+                <option value="{{p.0}}">{{ p.1 }}</option>
+                {% endif %}
+
                 {% endfor %}
             </select>
             <br>
@@ -43,12 +45,12 @@
                 <option value="1">Seleccionar</option>
                 {% for p in id_estado %}
 
-                    {% if p.0 == funcion.5 %}
-                        <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
-                    {% else %}
-                        <option value="{{p.0}}">{{ p.1 }}</option> 
-                    {% endif %}
- 
+                {% if p.0 == funcion.5 %}
+                <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
+                {% else %}
+                <option value="{{p.0}}">{{ p.1 }}</option>
+                {% endif %}
+
                 {% endfor %}
             </select>
             <br>
@@ -57,28 +59,40 @@
                 <option value="1">Seleccionar</option>
                 {% for p in id_usuario %}
 
-                    {% if p.0 == funcion.6 %}
-                        <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
-                    {% else %}
-                        <option value="{{p.0}}">{{ p.1 }}</option> 
-                    {% endif %}
-   
+                {% if p.0 == funcion.6 %}
+                <option selected="true" value="{{p.0}}">{{ p.1 }}</option>
+                {% else %}
+                <option value="{{p.0}}">{{ p.1 }}</option>
+                {% endif %}
+
                 {% endfor %}
             </select>
-            
+
             <br>
             <br>
-            <button type="submit" class="btn btn-primary" style="width:250px;" >Guardar</button>
+            <button type="submit" class="btn btn-primary" style="width:250px;">Guardar</button>
             <br>
             <br>
-        </form>   
+        </form>
         {{mensaje}}
 
-           
 
 
-        
-      </div>
+
+
     </div>
-  </div>  
+</div>
+
+
+<!--Mensaje de información de operación-->
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>
+    alert("{{ message }}");
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+</div>
 {% endblock %}

@@ -19,6 +19,8 @@ from django.db.models import Q
 from core import models
 from core.models import Tarea
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
@@ -60,8 +62,10 @@ def tarea(request):
 
         if salida == 1 :
             data['mensaje'] = 'Tarea agregada correctamente'
+            messages.info(request, "Operación Exitosa!")
         elif salida == 2 :
             data['mensaje'] = 'Erro al completar los campos'
+            messages.info(request, "Operación Fallida!")
 	   
         else:
             data['mensaje'] = 'no se ha podido guardar la tarea'
@@ -191,8 +195,10 @@ def editartarea(request,id_tarea):
        
         if salida == 1 :
             data['mensaje'] = 'Tarea %s editada correctamente'%id_tarea
+            messages.info(request, "Operación Exitosa!")
         else:
             data['mensaje'] = 'No se ha podido Editar la tarea '+str(id_tarea)
+            messages.info(request, "Operación Fallida!")
     return render(request,'uptarea.html',data)
 
 def actualizar_tarea (id_tarea, nombre, fecha_inicio, fecha_termino, estado_id_estado, funcion_id_funcion, descripcion, encargado):
@@ -223,8 +229,10 @@ def borrartarea(request, id_tarea):
         salida = eliminartarea(id_tarea)
         if salida == 1 :
             data['mensaje'] = 'tarea %s eliminada correctamente'%id_tarea
+            messages.info(request, "Operación Exitosa!")
         else:
             data['mensaje'] = 'No se ha podido eliminar la tarea '+str(id_tarea)
+            messages.info(request, "Operación Fallida!")
 
     return render(request,'borrartarea.html',data)
 
@@ -256,18 +264,29 @@ def acciontarea(request, id_tarea):
 
     if request.method == "POST":
         message_asunto = request.POST['message_asunto']
+        desc_mensaje = request.POST['desc_mensaje']
         message_email = request.POST['message_email']
-        message = request.POST['message']
+        message = desc_mensaje
+
+        idtarea = tarea[0]
+        asunto = "ID: {} - Nombre: {} - {}".format(idtarea,tarea[1],message_asunto)
+
+        message = '''Saludos desde Admintask, \n\n''' + tarea[1] + ' - ' + message_asunto + '\nDescripción: ' +  desc_mensaje + '''\n\nIngresa a Admintask para revisar ! 
+        \nTambien puedes contactarte con nosotros en contacontacto@processsa.com
+        \n\n\nAtentamente Admintask !!!'''
 
         send_mail(
-            message_asunto,
+            asunto,
             message,
             message_email,
             [correo],
             )
+        messages.info(request, 'Mensaje enviado correctamente!')
+        
             
         return render(request, 'acciontarea.html', data)
     else:
+        
         return render(request, 'acciontarea.html',data)
 
 def notificar(request, id_tarea):
@@ -282,18 +301,29 @@ def notificar(request, id_tarea):
 
     if request.method == "POST":
         message_asunto = request.POST['message_asunto']
+        desc_mensaje = request.POST['desc_mensaje']
         message_email = request.POST['message_email']
-        message = request.POST['message']
+        message = desc_mensaje
+        
+
+        idtarea = tarea[0]
+        asunto = "ID: {} - Nombre: {} - {}".format(idtarea,tarea[1],message_asunto)
+
+        message = '''Saludos desde Admintask, \n\n''' + tarea[1] + ' - ' + message_asunto + '\nDescripción: ' +  desc_mensaje + '''\n\nIngresa a Admintask para revisar ! 
+        \nTambien puedes contactarte con nosotros en contacontacto@processsa.com
+        \n\n\nAtentamente Admintask !!!'''
 
         send_mail(
-            message_asunto,
+            asunto,
             message,
             message_email,
             [correo],
             )
+        messages.info(request, 'Mensaje enviado correctamente!')
             
         return render(request, 'notificar.html', data)
     else:
+        
         return render(request, 'notificar.html',data)
 
 def tareasatrasadas():
@@ -377,7 +407,7 @@ def buscartarea(encargado):
     return buscar
 
 def listartareaporid(request):
-    #encargado = request.GET.get('encargado')
+    encargado = request.GET.get('encargado')
     data = {
         
     }

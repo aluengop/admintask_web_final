@@ -13,13 +13,7 @@
     <div id="content-centro" >
       <!-- Separación de la grilla a la izquierda -->
       <!--<h2> Reportar problema</h2>-->
-      {% if message_email %}
-      <h2>Gracias {{message_email}}</h2>
-      <p>
-          Recibimos tu solicitud y sera resuelta a la brevedad...
-      </p>
-      <br><br>
-      {% else %}
+
       
       <form style = "text-align: center; padding-bottom: 30px;"  method="POST">
         {% csrf_token %}
@@ -36,11 +30,11 @@
             <select  name="message_asunto" style="width:200px;" required="required">
                 <option value="0">Seleccionar</option>
                     <option value="Tu tarea esta por expirar">Tu tarea esta por expirar</option>
-                    <option value="Tu tarea ya expiro">Tu tarea ya expiró</option>            
+                    <option value="Tu tarea ya expiró">Tu tarea ya expiró</option>            
             </select>
             <br></br>
             <label for="">Descripción</label><br>
-            <input type="textarea" required="required" name="message" style="width:200px; height: 90px;">
+            <textarea name="desc_mensaje" required="required" rows="5" cols="40" style="width:250px;"></textarea>
               <button type="submit" class="btn btn-primary" style="width:200px;">Enviar</button>
               <br></br>
               <a class="btn btn-primary" style="width:200px;"
@@ -51,9 +45,16 @@
       </form>
             
       
-      {% endif %}
+      
     </div>
   </div>
+  {% if messages %}
+  {% for message in messages %}
+   {% if message.tags %}  
+      <script>alert("{{ message }}");</script> 
+    {% endif %}
+  {% endfor %}
+{% endif %}
 </div>  
 
 

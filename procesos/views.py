@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views import generic
 from django.db import connection
 import cx_Oracle
+
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 
 def listar_funcion():
@@ -52,10 +55,13 @@ def proceso(request):
         
         if salida == 1 :
             data['mensaje'] = 'Proceso agregado correctamente'
+            messages.info(request, 'Operación Exitosa!')
         elif salida == 2 :
-            data['mensaje'] = 'Las funciones seleccionadas deben ser distintas'  
+            data['mensaje'] = 'Las funciones seleccionadas deben ser distintas'
+            messages.info(request, 'Las funciones seleccionadas deben ser distintas')
         else:
-            data['mensaje'] = 'no se ha podido guardar'       
+            data['mensaje'] = 'No se ha podido guardar'
+            messages.info(request, 'No se ha podido guardar!')    
 
     return render(request, "crearproceso.html", data)
 
@@ -142,8 +148,10 @@ def editarProcesos(request, id_proceso):
         salida = editarProceso(id_proceso, nombre_proceso, descripcion_proceso, dias_inter)
         if salida == 1 :
             data['mensaje'] = 'Proceso %s editado correctamente'%id_proceso
+            messages.info(request, 'Proceso editado Exitosamente!')
         else:
             data['mensaje'] = 'No se ha podido Editar el proceso '+str(id_proceso)
+            messages.info(request, 'No se ha podido Editar el proceso')
         
     return render(request,'editarproceso.html',data)
 
@@ -167,8 +175,10 @@ def eliminarProcesos(request, id_proceso):
         salida = eliminarProceso(id_proceso)
         if salida == 1 :
             data['mensaje'] = 'Proceso %s eliminado correctamente'%id_proceso
+            messages.info(request, 'Proceso eliminado Exitosamente!')
         else:
             data['mensaje'] = 'No se ha podido eliminar el proceso '+str(id_proceso)
+            messages.info(request, 'No se ha podido eliminar el proceso')
 
     return render(request,'borrarproceso.html',data)
 

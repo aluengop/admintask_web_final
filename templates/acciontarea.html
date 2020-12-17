@@ -32,7 +32,8 @@
             </select>
             <br></br>
             <label for="">Descripción</label><br>
-        <input type="textarea" required="required" name="message" style="width:200px; height: 90px;">
+              <textarea name="desc_mensaje" required="required" rows="5" cols="40" style="width:250px;"></textarea>
+              
               <button type="submit" class="btn btn-primary" style="width:200px;">Enviar</button>
               <br></br>
               <a class="btn btn-primary" style="width:200px;"
@@ -47,6 +48,13 @@
       
     </div>
   </div>
+  {% if messages %}
+  {% for message in messages %}
+   {% if message.tags %}  
+      <script>alert("{{ message }}");</script> 
+    {% endif %}
+  {% endfor %}
+{% endif %}
 </div>  
 
 

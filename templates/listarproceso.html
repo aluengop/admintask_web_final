@@ -17,8 +17,13 @@
                 <th>Descripción</th>
                 <th>Días pre intervención</th>
                 <th>Funciones</th>
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
                 <th>Editar</th>
                 <th>Eliminar</th>
+                {% endif %}
+                {% endif %}
+
             </tr>
         
             {% for proceso in lista_procesos %}
@@ -31,6 +36,8 @@
                         <a class="btn btn-success" 
                         href="{% url 'listar_funproc' proceso.0 %}">Ver Funciones</a>
                     </td>
+                    {% if user.is_authenticated %}
+                    {% if user.is_rol != 3 %}
                     <td align="center">
                         <a class="btn btn-success" 
                         href="{% url 'editar_proceso' proceso.0 %}">Editar</a>
@@ -39,6 +46,9 @@
                         <a class="btn btn-danger" 
                         href="{% url 'borrar_proceso' proceso.0 %}">Borrar</a>
                     </td>
+                    {% endif %}
+                    {% endif %}
+
                 </tr>
             {% endfor %}
         </table>

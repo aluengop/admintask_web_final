@@ -21,10 +21,16 @@
             <th>FUNCIÓN</th>
             <th>DESCRIPCIÓN</th>
             <th>ENCARGADO</th>
+            {% if user.is_authenticated %}
+            {% if user.is_rol != 3 %}
             <th>EDITAR</th>
             <th>BORRAR</th>
-            <th>REPORTAR</th>
             <th>NOTIFICAR</th>
+            {% endif %}
+            {% endif %}
+            <th>REPORTAR</th>
+
+            
           </tr>
           </thead>
       
@@ -38,26 +44,30 @@
                 <td>{{ tarea.9 }}</td>
                 <td>{{ tarea.6 }}</td>
                 <td>{{ tarea.10 }}</td>
+
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
                   <td align="center">
                       <a href="{% url 'uptarea' tarea.0 %}" class="btn btn-success">Editar</a>
                       
-                  </td>
-
+                  </td>                  
                   <td align="center">
                     <a class="btn btn-danger" 
                     href="{% url 'borrartarea' tarea.0 %}">Borrar</a>
                   </td>
-
+                  <td align="center">
+                    <a class="btn btn-info" 
+                    href="{% url 'notificar' tarea.0  %}"><i class="far fa-bell"></i></a>
+                  </td>
+                  {% endif %}
+                  {% endif %}
                   <td align="center">
                     <a class="btn btn-warning" 
                     href="{% url 'email' tarea.0 %}"><i class="far fa-flag"></i></a>
                     
                   </td>
 
-                  <td align="center">
-                    <a class="btn btn-info" 
-                    href="{% url 'notificar' tarea.0  %}"><i class="far fa-bell"></i></a>
-                  </td>
+                  
               </tbody>
           {% endfor %}
       </table >

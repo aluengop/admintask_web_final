@@ -6,6 +6,9 @@ from datetime import date, datetime, timedelta
 #from django.http import JsonResponse
 import cx_Oracle
 
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+
 # Create your views here.
 def subtareas(request, *args, **kwargs):
     list_tareas = [ u for u in listar_tareas() ]
@@ -114,9 +117,11 @@ def agregarsubtarea(request, id_tarea):
         salida = agregar_tarea_bd(id_tarea, nombre_subtarea)
         
         if salida == 1 :
-            data['mensaje'] = 'agregado correctamente'
+            data['mensaje'] = 'Agregado correctamente'
+            messages.info(request, 'Operación Exitosa!')
         else:
-            data['mensaje'] = 'no se ha podido guardar' 
+            data['mensaje'] = 'No se ha podido guardar'
+            messages.info(request, 'No se ha podido guardar!')
 
     return render(request,"agregarsubtarea.html", data)
 
@@ -143,8 +148,10 @@ def editarsubtarea(request, id_subtarea):
 
         if salida == 1 :
             data['mensaje'] = 'Subtarea %s editada correctamente'%id_subtarea
+            messages.info(request, 'Operación Exitosa!')
         else:
             data['mensaje'] = 'No se ha podido Editar la sub tarea '+str(id_subtarea)
+            messages.info(request, 'No se ha podido Editar la sub tarea!')
             
     return render(request,"editarsubtarea.html", data)
 
@@ -168,8 +175,10 @@ def eliminarsubtarea(request, id_subtarea):
 
         if salida == 1 :
             data['mensaje'] = 'Subtarea %s eliminada correctamente'%id_subtarea
+            messages.info(request, 'Subtarea eliminada correctamente exitosamente!')
         else:
             data['mensaje'] = 'No se ha podido eliminar la subtarea '+str(id_subtarea)
+            messages.info(request, 'No se ha podido eliminar la subtarea!')
             
     return render(request,"eliminarsubtarea.html", data)
 

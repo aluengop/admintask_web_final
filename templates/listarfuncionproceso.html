@@ -26,7 +26,7 @@
 
         
             {% csrf_token %}          
-
+            <label for="">Agregar una Función al proceso</label><br>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="funcion" id="id_funcion" required>
                 <option value="">Seleccionar</option>
                 {% for p in listar_funcion %}

@@ -4,37 +4,49 @@
 
 {% block content %}
 
-<div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
-    <br>
-    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Editar unidad</h1>
-      <div id="content-centro" > 
-        <form action="" method="post">
-            {% csrf_token %}
-            <br>
-            <label for="">Nombre departamento</label><br>
-            <input type="text" value="{{unidad.1}}" name="nombre_departamento" style="width:200px;" required="required">
-            <br>
-                <label for="">Cliente</label><br>
-                <select name="id_cliente" id="DESCRIPCION" style="width:200px;" required="required">
-                    <option value="">seleccionar</option>
-                    {% for cliente in lista_clientes %}
-                      {% if cliente.1 == unidad.2 %}
-                        <option selected="true" value="{{cliente.0}}">{{ cliente.1 }}</option>
-                      {% else %}
-                        <option value="{{cliente.0}}">{{ cliente.1 }}</option> 
-                      {% endif %}
-                    {% endfor %}
-                </select>
-            </br>
-            <br>
-                <button type="submit" class="btn btn-primary" style="width:200px;">Guardar</button>
-            </br>
-            <a class="btn btn-primary" 
-            href="{% url 'listar_unidades' %}" style="width:200px;">Volver</a><br>
-            {{mensaje}}
-            <br>
-        </form>
-      </div>
-    </div>
-  </div>  
+<div class="container"
+  style="background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+  <br>
+  <h1 style="font-family: Helvetica; color:darkslategray; text-align: center; ">Editar unidad</h1>
+  <div id="content-centro">
+    <form action="" method="post">
+      {% csrf_token %}
+      <br>
+      <label for="">Nombre departamento</label><br>
+      <input type="text" value="{{unidad.1}}" name="nombre_departamento" style="width:200px;" required="required">
+      <br>
+      <label for="">Cliente</label><br>
+      <select name="id_cliente" id="DESCRIPCION" style="width:200px;" required="required">
+        <option value="">seleccionar</option>
+        {% for cliente in lista_clientes %}
+        {% if cliente.1 == unidad.2 %}
+        <option selected="true" value="{{cliente.0}}">{{ cliente.1 }}</option>
+        {% else %}
+        <option value="{{cliente.0}}">{{ cliente.1 }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      </br>
+      <br>
+      <button type="submit" class="btn btn-primary" style="width:200px;">Guardar</button>
+      </br>
+      <a class="btn btn-primary" href="{% url 'listar_unidades' %}" style="width:200px;">Volver</a><br>
+      {{mensaje}}
+      <br>
+    </form>
+  </div>
+</div>
+
+<!--Mensaje de información de operación-->
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>
+  alert("{{ message }}");
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+</div>
 {% endblock %}
