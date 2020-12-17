@@ -1,0 +1,314 @@
+{% extends 'base-fuera.html' %}
+<!--llama a la plantilla-->
+
+{% load static %}
+<!--llamado a la carpeta estatica-->
+
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Amaranth';
+        font-size: 14px;
+    }
+
+    .about-section {
+        padding: 4em 0;
+    }
+
+    .site-title {
+        padding: 2em 0;
+    }
+
+    .site-title h3 {
+        font-size: 3.5em;
+        /*color: #14B9D5;*/
+        color: #37448C;
+        font-family: 'Marvel-Regular';
+        font-weight: 700;
+    }
+
+    .site-title p {
+        font-size: 1.1em;
+        color: #333333;
+        line-height: 1.8em;
+        margin-top: 0.5em;
+    }
+
+    .about-inner-column h4 {
+        font-size: 2.5em;
+        /*color: #FFD001;*/
+        color: #4B64F2;
+        font-family: 'Marvel-Regular';
+    }
+
+    .about-inner-column p {
+        font-size: 1.1em;
+        color: #333333;
+        line-height: 1.8em;
+        margin: 1em 0 0;
+    }
+
+    .about-inner-column ul li a {
+        color: #333333;
+        font-size: 1.1em;
+        padding-left: 2em;
+    }
+
+    .about-right img {
+        width: 100%;
+    }
+</style>
+
+<!--INICIO DE SECCIÓN NOSOTRO-->
+<div id="myInfo">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
+    <div class="about-section">
+        <div class="container">
+            <div class="site-title text-center">
+                <h3>Nosotros</h3>
+                <p>Admintask es un sistema de gestión ERP Chileno, que inica el 20 de Agosto del 2020, como proyecto de
+                    la asignatura de Portafolio para la carrera de Ingeniería en Informática.</p>
+            </div>
+            <div class="about-inner-section">
+                <div class="col-md-6 about-inner-column">
+                    <h4>Admintask para su sistema</h4>
+                    <p>Admintask proporciona un buen sistema de gestión para los procesos de su empresa. Nuestra
+                        tecnología le permitirá obtener mayor control y monitorización de sus procesos.</p>
+                    <br>
+                    <br>
+                    <h4>Ventajas</h4>
+                    <ul>
+                        <li>El sistema está optimizado para brindar seguridad y protección de sus datos integrando
+                            algoritmos de encriptación en todos los datos sensibles. </li>
+                        <li>El sistema le proporcionará un apoyo en los procesos productivos.</li>
+                        <li>El sistema esta disponible en un ambiente web para el acceso de funcionarios autorizados y
+                            validados.</li>
+                        <li>El sistema de adminstración esta integrado en un entorno de escritorio, brindando mayor
+                            seguridad ante amenzas.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 about-right">
+                    <!--<img src="https://images.pexels.com/photos/7096/people-woman-coffee-meeting.jpg?w=940&h=650&auto=compress&cs=tinysrgb" alt=" ">-->
+
+                    <img src="https://www.si-mad.com/wp-content/uploads/2017/05/equipos-informaticos.jpg" alt=" "
+                        style="border-radius: 20px">
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!--FIN DE SECCIÓN NOSOTRO-->
+
+<!--==============================================================================================
+==================================================================================================
+==================================================================================================
+==================================================================================================
+==================================================================================================
+==================================================================================================-->
+
+<!--INICIO DE SECCIÓN SITEMAP-->
+<style>
+    /*Now the CSS Created by R.S*/
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .tree ul {
+        padding-top: 20px;
+        position: relative;
+
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+    .tree li {
+        float: left;
+        text-align: center;
+        list-style-type: none;
+        position: relative;
+        padding: 20px 5px 0 5px;
+
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+    /*We will use ::before and ::after to draw the connectors*/
+
+    .tree li::before,
+    .tree li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 50%;
+        border-top: 1px solid #ccc;
+        width: 50%;
+        height: 20px;
+    }
+
+    .tree li::after {
+        right: auto;
+        left: 50%;
+        border-left: 1px solid #ccc;
+    }
+
+    /*We need to remove left-right connectors from elements without 
+any siblings*/
+    .tree li:only-child::after,
+    .tree li:only-child::before {
+        display: none;
+    }
+
+    /*Remove space from the top of single children*/
+    .tree li:only-child {
+        padding-top: 0;
+    }
+
+    /*Remove left connector from first child and 
+right connector from last child*/
+    .tree li:first-child::before,
+    .tree li:last-child::after {
+        border: 0 none;
+    }
+
+    /*Adding back the vertical connector to the last nodes*/
+    .tree li:last-child::before {
+        border-right: 1px solid #ccc;
+        border-radius: 0 5px 0 0;
+        -webkit-border-radius: 0 5px 0 0;
+        -moz-border-radius: 0 5px 0 0;
+    }
+
+    .tree li:first-child::after {
+        border-radius: 5px 0 0 0;
+        -webkit-border-radius: 5px 0 0 0;
+        -moz-border-radius: 5px 0 0 0;
+    }
+
+    /*Time to add downward connectors from parents*/
+    .tree ul ul::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-left: 1px solid #ccc;
+        width: 0;
+        height: 20px;
+    }
+
+    .tree li a {
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: #666;
+        font-family: arial, verdana, tahoma;
+        font-size: 20px;
+        display: inline-block;
+
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+    /*Time for some hover effects*/
+    /*We will apply the hover effect the the lineage of the element also*/
+    .tree li a:hover,
+    .tree li a:hover+ul li a {
+        /*background: #c8e4f8;*/
+        background: #4B64F2;
+        color: #000;
+        border: 1px solid #94a0b4;
+    }
+
+    /*Connector styles on hover*/
+    .tree li a:hover+ul li::after,
+    .tree li a:hover+ul li::before,
+    .tree li a:hover+ul::before,
+    .tree li a:hover+ul ul::before {
+        border-color: #94a0b4;
+    }
+
+    /*Thats all. I hope you enjoyed it.
+Thanks :)*/
+
+    .site-title h3 {
+        font-size: 3.5em;
+        /*color: #14B9D5;*/
+        color: #37448C;
+        font-family: 'Marvel-Regular';
+        font-weight: 700;
+    }
+</style>
+
+<br>
+<br>
+<hr>
+<br>
+<br>
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="site-title text-center">
+            <h3>SiteMap</h3>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <!--
+We will create a family tree using just.
+The markup will be simple nested lists
+-->
+
+                <div class="tree ">
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Login</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Panel general</a>
+                                            <ul>
+                                                <li><a href="#">Procesos</a></li>
+                                                <li><a href="#">Funciones</a></li>
+                                                <li><a href="#">Tareas</a></li>
+                                                <li><a href="#">Unidad</a></li>
+                                                <li><a href="#">Info</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<!--FIN DE SECCIÓN SITEMAP-->
+
+{% endblock %}

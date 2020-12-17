@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Workspace{% endblock %}
+
+{% block content %}
+<form action="" method="POST" autocomplete="off"></form>
+    <div class="container">
+        <label>Filtrar tarea: </label>
+        <select name="filtro" id="DESCRIPCION" style="width:200px;">
+            <option selected="0" value="0">Todas las tareas</option>
+            {% for elemento in lista_elementos %}
+                <option  value="{{elemento.tarea.0}}">{{ elemento.tarea.0 }} - {{elemento.tarea.1}}</option>
+            {% endfor %}
+        </select>
+
+        <div class="row">
+            {% for elemento in lista_elementos %}
+                <div class="col-4"> 
+                    <div class=tarea style='background: white; border-radius: 15px; box-shadow: 10px 10px 5px grey;'>
+                        <div class=contenidotarea style='margin:5%; margin-top:5%;'>
+                            
+                            <h5 style = "font-family: Helvetica; color:darkslategray; font-size:25px;">{{elemento.tarea.0}} - {{elemento.tarea.1}}</h5>
+                            <h6 style="font-size:12px; ">{{elemento.tarea.2}} - {{elemento.tarea.3}}</h6>
+                            
+                            <div style="margin-top: 5%; margin-bottom: 5%; ">
+                                <h6 style="font-size:15px;">Progreso: {{elemento.progreso}}</h6>
+ 
+                                <div class="progress" >
+                                    <div class="progress-bar" role="progressbar" style="width: {{elemento.progreso}};" ></div>
+                                </div>
+                            </div>
+
+                                {% csrf_token %}
+                                <table  border="0">
+                                    <tr>
+                                        <th>Subtareas</th>
+                                    </tr>
+                                
+                                {% for sub in elemento.sub_tareas %}
+
+                                    <tr>
+                                        <td>
+                                        {%if sub.2 == "1" %}
+                                            <div class="form-check">
+                                                <input name ="estados" id = "{{sub.1}}" class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label" for="{{sub.1}}">
+                                                  {{sub.1}}
+                                                </label>
+                                              </div>
+                                        {%else%}
+                                        <div class="form-check">
+                                            <input name ="estados" id = "{{sub.1}}" class="form-check-input" type="checkbox" aria-checked="false">
+                                            <label class="form-check-label" for="{{sub.1}}">
+                                              {{sub.1}}
+                                            </label>
+                                          </div>                                        
+                                        {%endif%}
+                                        
+                                                <a class="btn btn-secondary btn-sm"  href="{% url 'editar_subtarea' sub.0 %}">
+                                                    <i class="fas fa-pencil-alt" style="align-items: center;"></i>      
+                                                </a>
+
+                                                <a class="btn btn-secondary btn-sm" href="{% url 'eliminarsubtarea' sub.0 %}">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                {% endfor %}
+
+                            </table>
+                            <br>
+                            <div style = "text-align: center; ">
+                                <a class="btn btn-primary" href="{% url 'agregar_subtarea' elemento.tarea.0 %}">Agregar Subtarea</a>
+                            </div> 
+                        
+                        </div>
+                        <!--<div style = "text-align: center; ">
+                            <a href="#SubModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Ver subtareas</a>
+                        </div>-->
+                        <br>
+                    
+                    </div>
+                
+                </div>
+                
+
+                <!-- Modal / Ventana / Overlay en HTML 
+                <div id="SubModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Subtareas</h4>
+                                
+                                
+                            </div>
+                            <div class="modal-body">
+                                
+                                
+                            </div>
+                            <div class="modal-footer" style="align-items: center;">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+            {% endfor %}
+            
+        </div>
+    </div>
+
+
+{% endblock %}

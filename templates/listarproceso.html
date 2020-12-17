@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de procesos{% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de procesos</h1>
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">
+
+        
+        <table  border="1" class="table table-striped">
+            <tr>
+                <th>Id Proceso</th>
+                <th>Nombre </th>
+                <th>Descripción</th>
+                <th>Días pre intervención</th>
+                <th>Funciones</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        
+            {% for proceso in lista_procesos %}
+                <tr>
+                    <td>{{proceso.0}}</td>
+                    <td>{{proceso.1}}</td>
+                    <td>{{proceso.2}}</td>
+                    <td>{{proceso.3}}</td>
+                    <td align="center">
+                        <a class="btn btn-success" 
+                        href="{% url 'listar_funproc' proceso.0 %}">Ver Funciones</a>
+                    </td>
+                    <td align="center">
+                        <a class="btn btn-success" 
+                        href="{% url 'editar_proceso' proceso.0 %}">Editar</a>
+                    </td>
+                    <td align="center">
+                        <a class="btn btn-danger" 
+                        href="{% url 'borrar_proceso' proceso.0 %}">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

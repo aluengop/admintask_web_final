@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Proceso{% endblock %}
+
+{% block content %}
+
+<!-- Page Content  -->
+<div id="content">
+
+        <div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey;">
+            <br>
+            <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Agregar Proceso</h1>
+          
+              <div id="content-centro" >
+        <!--<h2> Agregar Proceso</h2>-->  
+            <form style = "text-align: center; padding-bottom: 30px;" action="" method="POST">
+                {% csrf_token %}
+                <label for="">Nombre</label><br>
+                <input type="text" required="required" name="nombre_proceso" size="20" style="width:250px;">
+                <br>
+                <br>
+                <label for="">Descripción</label><br>
+                <textarea name="descripcion_proceso" required="required" rows="5" cols="40" style="width:250px;"></textarea>
+  
+                <br>
+                <br>
+                <label for="">Días pre intervención</label><br>
+                <input type="number" required="required" min="1" name="dias_inter" size="20" style="width:250px;">
+                <br>
+                <br>
+
+                <label for="">Función 1</label><br>
+                <select name="funcion_id_funcion" id="funcion_id_funcion" style="width:250px;" required>
+                    <option value="">Seleccionar</option>
+                    {% for p in listar_funcion %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>      
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <label for="">Función 2</label><br>
+                <select name="funcion_id_funcion2" id="funcion_id_funcion2" style="width:250px;" required>
+                    <option value="">Seleccionar</option>
+                    {% for p in listar_funcion %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>      
+                    {% endfor %}
+                </select>
+                <br>
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" style="width:200px;">Guardar</button>
+                <br>
+                {{mensaje}}
+            </form>
+        </div>
+            
+            
+
+</div>
+{% endblock %}

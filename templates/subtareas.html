@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Workspace{% endblock %}
+
+{% block content %}
+<form action="" method="POST" autocomplete="off"></form>
+    <div class="container">
+        <label>Filtrar tarea: </label>
+    
+        <div class="row">
+            {% for elemento in lista_elementos %}
+                <div class="col-4"> 
+                    <div class=tarea style='background: white; border-radius: 15px; box-shadow: 10px 10px 5px grey;'>
+                        <div class=contenidotarea style='margin:5%; margin-top:5%;'>
+                            
+                            <h5 style = "font-family: Helvetica; color:darkslategray; font-size:25px;">{{elemento.tarea.0}} - {{elemento.tarea.1}}</h5>
+                            <h6 style="font-size:12px; ">{{elemento.tarea.2}} - {{elemento.tarea.3}}</h6>
+                            {% if elemento.semaforo == 1 %}
+                                <label style="color:green">Tarea en tiempo </label><img class= "semaforo_status" src="{% static 'img/semaforo_verde.png' %}" width="12" height="12" alt="" style="margin-left: 2%">
+                            {% elif elemento.semaforo == 2 %}
+                                <label style="color:#B2B200">Tarea por vencer </label><img class= "semaforo_status" src="{% static 'img/semaforo_amarillo.png' %}" width="12" height="12" alt="" style="margin-left: 2%">
+                            {% elif elemento.semaforo == 3 %}
+                                <label style="color:red">Tarea atrasada </label><img class= "semaforo_status" src="{% static 'img/semaforo_rojo.png' %}" width="12" height="12" alt="" style="margin-left: 2%">
+                            {% endif %}
+
+                            <div>
+                                <h6 style="font-size:15px;">Progreso: {{elemento.progreso}}</h6>
+ 
+                                <div class="progress" >
+                                    <div class="progress-bar" role="progressbar" style="width: {{elemento.progreso}};" ></div>
+                                </div>
+                            </div>
+
+                                {% csrf_token %}
+                                <table  border="0">
+                                    <tr>
+                                        <th>Subtareas</th>
+                                    </tr>
+                                
+                                {% for sub in elemento.sub_tareas %}
+
+                                    <tr>
+                                        <td>
+                                            {%if sub.2 == "1" %}
+                                                
+                                                <i class="far fa-check-circle" style="color:#28A745;"></i> {{sub.1}} 
+                                                
+                                            {%else%}
+                                                <i class="far fa-circle" style="color:gray"></i> {{sub.1}}                                       
+                                            {%endif%}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-secondary btn-sm"  href="{% url 'editar_subtarea' sub.0 %}">
+                                                <i class="fas fa-pencil-alt" style="align-items: center;"></i>      
+                                            </a>
+
+                                            <a class="btn btn-secondary btn-sm" href="{% url 'eliminarsubtarea' sub.0 %}">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                            </table>
+                            <br>
+                            <div style = "text-align: center; ">
+                                <a class="btn btn-primary" href="{% url 'agregar_subtarea' elemento.tarea.0 %}">Agregar Subtarea</a>
+                            </div> 
+                        
+                        </div>
+
+                        <br>
+                    
+                    </div>
+                
+                </div>
+                
+
+
+            {% endfor %}
+            
+        </div>
+    </div>
+
+
+{% endblock %}

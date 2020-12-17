@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tarea{% endblock %}
+
+{% block content %}
+
+<!-- Page Content  -->
+
+<div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey;">
+  <br>
+  <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Notificar estado de tarea</h1>
+
+    <div id="content-centro" >
+      <!-- Separación de la grilla a la izquierda -->
+      <!--<h2> Reportar problema</h2>-->
+      {% if message_email %}
+      <h2>Gracias {{message_email}}</h2>
+      <p>
+          Recibimos tu solicitud y sera resuelta a la brevedad...
+      </p>
+      <br><br>
+      {% else %}
+      
+      <form style = "text-align: center; padding-bottom: 30px;"  method="POST">
+        {% csrf_token %}
+        <br>
+        <label for="">Tarea</label><br>
+        <input disabled type="text" value="{{tarea.1}}" name="nombre_tarea" style="width:200px;">
+        <br>
+        <label for="">Fecha Término</label><br>
+        <input disabled type="text" value="{{tarea.3}}" name="fecha_termino" style="width:200px;"><br>
+        <label for="">Tu correo</label><br>
+        <input type="text" required="required" name="message_email" style="width:200px;"><br>
+        <br>
+            <label for="">Asunto</label><br>
+            <select  name="message_asunto" style="width:200px;" required="required">
+                <option value="0">Seleccionar</option>
+                    <option value="Tu tarea esta por expirar">Tu tarea esta por expirar</option>
+                    <option value="Tu tarea ya expiro">Tu tarea ya expiró</option>            
+            </select>
+            <br></br>
+            <label for="">Descripción</label><br>
+            <input type="textarea" required="required" name="message" style="width:200px; height: 90px;">
+              <button type="submit" class="btn btn-primary" style="width:200px;">Enviar</button>
+              <br></br>
+              <a class="btn btn-primary" style="width:200px;"
+                href="{% url 'listartarea' %}">Volver</a>
+              <br></br>
+        {{mensaje}}
+        
+      </form>
+            
+      
+      {% endif %}
+    </div>
+  </div>
+</div>  
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Agregar subtarea{% endblock %}
+
+{% block content %}
+<div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+    <br>
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Agregar subtarea</h1>
+      <div id="content-centro" > 
+        <form action="" method="POST">
+            {% csrf_token %}
+            <br>
+            <label for="">Nombre subtarea</label><br>
+            <input type="text" value="" name="nombre_subtarea" style="width:200px;" required="required">
+            <br>
+                <button type="submit" class="btn btn-primary" style="width:200px;">Guardar</button>
+            </br>
+            <a class="btn btn-primary" 
+            href="{% url 'subtareas' %}" style="width:200px;">Volver</a><br>
+            {{mensaje}}
+            <br>
+        </form>
+      </div>
+    </div>
+  </div> 
+
+{% endblock %}

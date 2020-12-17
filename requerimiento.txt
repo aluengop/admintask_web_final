@@ -1,0 +1,11 @@
+requerimiento
+----------------------
+
+pip freeze
+python -m pip install django
+pip install cx_oracle
+pip install dj-database-url
+pip install pillow
+
+python 3.7.9
+django 3.1.1

@@ -1,0 +1,81 @@
+
+{% load static %}
+{% block title %}Lista de tareas{% endblock %}
+
+{% block content %}
+
+
+      <div>
+        <label for="">ID Encargado: </label>
+        <input type="text" name="encargado" style="width:80px;">
+        <td align="center">
+          <a class="btn btn-primary" 
+             style="width:100px;"
+          href="{% url 'buscartarea'  %}">Buscar</a>
+        </td>  
+      </div>
+   
+
+
+
+<div class="container-listado" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de Tareas</h1>
+    
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">       
+          
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FECHA INICIO</th>
+            <th>FECHA TÉRMINO</th>
+            <th>ESTADO</th>
+            <th>FUNCIÓN</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ENCARGADO</th>
+            <th>EDITAR</th>
+            <th>BORRAR</th>
+            <th>REPORTAR</th>
+            <th>NOTIFICAR</th>
+          </tr>
+          </thead>
+      
+          {% for fila in buscar %}
+              <tbody>
+                <td >{{ fila.0 }}</td>
+                <td>{{ fila.1 }}</td>
+                <td>{{ fila.2 }}</td>
+                <td>{{ fila.3 }}</td>
+                <td>{{ fila.4 }}</td>
+                <td>{{ fila.5 }}</td>
+                <td>{{ fila.6 }}</td>
+                <td>{{ fila.7 }}</td>
+                  <td align="center">
+                      <a href="{% url 'uptarea' tarea.0 %}" class="btn btn-success">Editar</a>
+                      
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-danger" 
+                    href="{% url 'borrartarea' tarea.0 %}">Borrar</a>
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-warning" 
+                    href="{% url 'email' tarea.0 %}"><i class="far fa-flag"></i></a>
+                    
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-info" 
+                    href="{% url 'notificar' tarea.0  %}"><i class="far fa-bell"></i></a>
+                  </td>
+              </tbody>
+          {% endfor %}
+      </table >
+      </form>
+    </div>
+  </div>
+  {% endblock %}

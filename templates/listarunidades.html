@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de unidades{% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de unidades</h1>
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">
+        <!--<label for="">Cliente</label>
+        <select name="id_cliente" id="DESCRIPCION" style="width:200px;" required>
+            <option value="">Seleccionar</option>
+            {% for cliente in lista_clientes %}
+                <option value="{{cliente.0}}">{{ cliente.1 }}</option>   
+            {% endfor %}
+        </select>-->
+        <table  border="1" class="table table-striped">
+            <tr>
+                <th>Id_unidad</th>
+                <th>Nombre del departamento</th>
+                <th>Cliente</th>
+                <th>  Editar </th>
+                <th> Borrar  </th>
+            </tr>
+        
+            {% for unidad in lista_unidades %}
+                <tr>
+                    <td>{{unidad.0}}</td>
+                    <td>{{unidad.1}}</td>
+                    <td>{{unidad.2}}</td>
+                    <td align="center">
+                        <a class="btn btn-success" 
+                        href="{% url 'editar_unidad' unidad.0 %}">Editar</a>
+                    </td>
+                    <td align="center">
+                        <a class="btn btn-danger" 
+                        href="{% url 'borrar_unidad' unidad.0 %}">Borrar</a>
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </table>
+
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

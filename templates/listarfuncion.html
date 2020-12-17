@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de funciones{% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de Funciones</h1>
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">
+        <!--<label for="">Cliente</label>
+        <select name="id_cliente" id="DESCRIPCION" style="width:200px;" required>
+            <option value="">Seleccionar</option>
+            {% for cliente in lista_clientes %}
+                <option value="{{cliente.0}}">{{ cliente.1 }}</option>   
+            {% endfor %}
+        </select>-->
+
+        <table border="1" class="table table-striped">
+          <tr>
+              <th>NOMBRE</th>
+              <th>FECHA INICIO</th>
+              <th>FECHA TERMINO</th>
+              <th>UNIDAD</th>
+              <th>ESTADO</th>
+              <th>USUARIO</th>
+              <th>EDITAR</th>
+              
+          </tr>
+      
+          {% for funcion in funcion %}
+              <tr>
+                  <td>{{ funcion.1 }}</td>
+                  <td>{{ funcion.2 }}</td>
+                  <td>{{ funcion.3 }}</td>
+                  <td>{{ funcion.7 }}</td>
+                  <td>{{ funcion.8 }}</td>
+                  <td>{{ funcion.9 }}</td>
+                  <td align="center">
+                      <a href="{% url 'editar_funcion' funcion.0 %}" class="btn btn-success">Editar</a>
+                      
+                  </td>
+                  <td align="center">
+                    <a class="btn btn-danger" 
+                    href="{% url 'borrar_funcion' funcion.0 %}">Borrar</a>
+                </td>
+                  
+      
+                   
+              </tr>
+          {% endfor %}
+      </table>
+        
+
+
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}
+

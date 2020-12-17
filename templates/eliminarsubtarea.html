@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Subtarea{% endblock %}
+
+{% block content %}
+
+
+<div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+    <br>
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Eliminar subtarea</h1>
+  
+      <div id="content-centro" > 
+        <tr>
+            <td>Subtarea {{subtarea.1}}</td><br>
+        </tr>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <br>
+                    <button type="submit" class="btn btn-danger" style="width:200px;">Eliminar</button>
+                </br>
+                <a class="btn btn-primary" style="width:200px;"
+                href="{% url 'subtareas' %}">Volver</a>
+            </form>
+            
+            {{mensaje}}
+        <br>
+
+      </div>
+    </div>
+  </div>  
+{% endblock %}

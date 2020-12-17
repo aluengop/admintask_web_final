@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Proceso{% endblock %}
+
+{% block extrajs %}
+    <title>Admintask</title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" th:href="@{/css/index.css}">
+
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.is_superuser or user.is_staff %}
+<form action="" method="POST" autocomplete="off">
+
+    
+    <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Crear proceso</h1>
+                <hr class="my-4">
+                {%csrf_token%}
+                {{form.id_proceso|as_crispy_field}}
+                {{form.nombre|as_crispy_field}}
+                {{form.descripcion|as_crispy_field}}
+                <button type="submit" class="btn btn-success">Agregar</button>
+              </div>
+        </div>
+
+    </div>
+
+   
+
+    
+</form>
+
+{% else %}
+<p> No tienes autorización para esta sección </p>
+{% endif %}
+
+{% else %}
+<p> Aún no iniciaste sesion </p>
+<a href="{% url 'login' %}"> Ingresar </a> | <a href="{% url 'register' %}">Registrarse</a>
+
+{% endif %}       
+{% endblock %}

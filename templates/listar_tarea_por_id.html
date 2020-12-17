@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de tareas por id{% endblock %}
+
+{% block content %}
+
+<div class="container-listado" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de Tareas</h1>
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">       
+          
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FECHA INICIO</th>
+            <th>FECHA TÉRMINO</th>
+            <th>ESTADO</th>
+            <th>FUNCIÓN</th>
+            <th>DESCRIPCIÓN</th>
+            <th>ENCARGADO</th>
+            <th>EDITAR</th>
+            <th>BORRAR</th>
+            <th>ACCIÓN</th>
+            <th>NOTIFICAR</th>
+          </tr>
+          </thead>
+      
+          {% for tarea in tarea %}
+              <tbody>
+                <td >{{ tarea.0 }}</td>
+                <td>{{ tarea.1 }}</td>
+                <td>{{ tarea.2 }}</td>
+                <td>{{ tarea.3 }}</td>
+                <td>{{ tarea.8 }}</td>
+                <td>{{ tarea.9 }}</td>
+                <td>{{ tarea.6 }}</td>
+                <td>{{ tarea.10 }}</td>
+                  <td align="center">
+                      <a href="{% url 'uptarea' tarea.0 %}" class="btn btn-success">Editar</a>
+                      
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-danger" 
+                    href="{% url 'borrartarea' tarea.0 %}">Borrar</a>
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-danger" 
+                    href="{% url 'email' tarea.0 %}">Accion</a>
+                  </td>
+
+                  <td align="center">
+                    <a class="btn btn-danger" 
+                    href="{% url 'notificar' tarea.0  %}">Notificar</a>
+                  </td>
+              </tbody>
+          {% endfor %}
+      </table >
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

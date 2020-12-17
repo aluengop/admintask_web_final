@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Funciones de proceso{% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Listado de funciones del proceso {{proceso}}</h1>
+    <div class="abs-center" style = "background: white;">
+    <form action="" class="border p-3 form" style = "text-align: center;" method="POST">
+        
+        <table  border="1" class="table table-striped">
+            <tr>
+                <th>Id Funcion</th>
+                <th>Nombre </th>
+                
+            </tr>
+        
+            {% for fila in lista %}
+                <tr>
+                    <td>{{fila.0}}</td>
+                    <td>{{fila.1}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        
+            {% csrf_token %}          
+
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="funcion" id="id_funcion" required>
+                <option value="">Seleccionar</option>
+                {% for p in listar_funcion %}
+    
+                    <option value="{{p.0}}">{{ p.1 }}</option> 
+       
+                {% endfor %}
+            </select><br>
+                                  
+                
+            <button type="submit" class="btn btn-primary" style="width: 200px;">Agregar</button><br>
+            <a class="btn btn-primary" 
+                href="{% url 'listar_procesos' %}" style="width:150px;">Volver</a>
+                
+                <a class="btn btn-primary" href="{% url 'listar_funproc' proceso %}" style="width: 50px;">
+                    <i class="fas fa-sync"></i>
+                </a>
+                    
+        
+        <br>
+        {{mensaje}}
+    </form>
+
+        
+      
+    </div>
+  </div>
+{% endblock %}

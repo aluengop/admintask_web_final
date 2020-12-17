@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Lista de Tareas atrasadas{% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center;">Tareas por vencer VS Tareas vencidas</h1>
+    <div class="abs-center" style = "background: white;">
+      <form action="#" class="border p-3 form">
+        {% if tamanoVencidas == 0 %}
+        <h2 style = "font-family: Helvetica; color:darkslategray; text-align: center;">No hay tareas vencidas!</h2>
+
+        {%else%}
+        <div class="row">
+            <table class="table table-striped" border="1">
+                <tbody>
+                <tr>
+                <td style="text-align: center;" colspan="4">Tareas Vencidas</td>
+                </tr>
+                <tr >
+                <td>ID</td>
+                <td>NOMBRE</td>
+                <td>INICIO</td>
+                <td>TERMINO</td>
+                </tr>
+                {% for v in list_vencidas %}
+                <tr >
+                    
+                    <td>{{ v.0 }}</td>
+                    <td>{{ v.1 }}</td>
+                    <td>{{ v.2 }}</td>
+                    <td>{{ v.3 }}</td>
+                    
+                </tr>
+                {% endfor %}
+                <tr>
+                <td style="text-align: center;" colspan="4" style="text-align: center;">Total de tareas vencidas: {{ vencidas }}</td>
+                </tr>
+                </tbody>
+                </table>
+        </div>
+        {% endif %}
+
+        {% if tamanoxVencer == 0 %}
+        <h2 style = "font-family: Helvetica; color:darkslategray; text-align: center;">No hay tareas por vencer!</h2>
+
+        {%else%}
+        <div class="row" >
+            <table class="table table-striped" border="1">
+                <tbody>
+                <tr>
+                <td colspan="4">Tareas por Vencer</td>
+                </tr>
+                <tr >
+                <td>ID</td>
+                <td>NOMBRE</td>
+                <td>INICIO</td>
+                <td>TERMINO</td>
+                </tr>
+                {% for x in list_xvencer %}
+                <tr >
+                    
+                    <td>{{ x.0 }}</td>
+                    <td>{{ x.1 }}</td>
+                    <td>{{ x.2 }}</td>
+                    <td>{{ x.3 }}</td>
+                    
+                </tr>
+                {% endfor %}
+                <tr>
+                <td style="text-align: center;" colspan="4">Total de tareas por vencer: {{ xvencer }}</td>
+                </tr>
+                </tbody>
+                </table>
+        </div>
+        
+        {% endif %}          
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base-fuera.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/1.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1" style = "text-align: justify;">
+          <div class="p-5">
+            <h2 class="display-4">Sobre nosotros</h2>
+            <p>Process SA se especializa en el control 
+                y orden de procesos. Con nosotros tendrás 
+                tus tareas ordenadas generando mayor 
+                practicidad y ahorrando el tiempo y la 
+                productividad de su equipo. Contáctanos!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/4.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6" style = "text-align: justify;">
+          <div class="p-5">
+            <h2 class="display-4">Misión</h2>
+            <p>Nuestra misión es inovar en los métodos de control de tareas para facilitar cada vez más el trabajo cotidiano de los colaboradores en nuestros clientes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" src="{% static 'img/3.png' %}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <div class="p-5">
+            <h2 class="display-4">Visión</h2>
+            <p>Ser una empresa reconocida por los clientes y colaboradores 
+              como la mejor del rubro debido a la calidad de nuestros servicios</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

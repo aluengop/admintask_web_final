@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tarea{% endblock %}
+
+{% block content %}
+
+    <div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+        <br>
+        <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Crear tarea</h1>
+      
+          <div id="content-centro" > 
+            <form action="" method="POST">
+                {% csrf_token %}
+                <br>
+                <label for="">Nombre</label><br>
+                <input type="text" name="nombre" size="20" style="width:250px;" required="required">
+                <br></br>
+                <label for="">Fecha de Inicio</label><br>
+                <input type="date" name="fecha_inicio" style="width:250px;" required="required">
+                <br></br>
+                <label for="">Fecha de Termino</label><br>
+                <input type="date" name="fecha_termino" style="width:250px;" required="required">
+                <br></br>
+                <label for="">Estado</label><br>
+                <select name="Estado" id="DESCRIPCION" style="width:250px;" required="required">
+                    <option value="">Seleccionar</option>
+                    {% for p in id_estado %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>   
+                    {% endfor %}
+                </select>
+                <br></br>
+                <label for="">Función</label><br>
+                <select name="funcion_id_funcion" id="funcion_id_funcion" style="width:250px;" required="required">
+                    <option value="">Seleccionar</option>
+                    {% for p in id_funcion %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>      
+                    {% endfor %}
+                </select>
+                <br></br>
+                <label for="">Descripción</label><br>
+                <textarea name="Descripcion" rows="4" cols="40" style="width:250px;" required="required"></textarea>
+                <br></br>
+         
+                <label for="">Usuarios</label><br>
+                <select name="id_usuario" id="DESCRIPCION" style="width:250px;" required="required">
+                    <option value="">Seleccionar</option>
+                    {% for encargado in lista_encargado %}
+                        <option value="{{encargado.0}}">{{ encargado.1 }}</option>   
+                    {% endfor %}
+                </select><br></br>
+        
+                <select name="id_usuario2" id="DESCRIPCION2" style="width:250px;" required="required">
+                    <option value="">Seleccionar</option>
+                    {% for usuario in lista_usuarios %}
+                        <option value="{{usuario.0}}">{{ usuario.1 }}</option>   
+                    {% endfor %}
+                </select><br></br>
+        
+                <label for="">Encargado</label><br>
+                <select name="id_encargado" id="DESCRIPCION3" style="width:250px;" required="required">
+                    <option value="">Seleccionar</option>
+                    {% for encargado in lista_encargado %}
+                        <option value="{{encargado.0}}">{{ encargado.1 }}</option>   
+                    {% endfor %}
+                </select><br></br>
+        
+                <button type="submit" class="btn btn-primary" style="width:250px;">Guardar</button>
+                <br></br>
+                {{mensaje}}  
+                <br></br>
+            </form>           
+          </div>
+        </div>
+      </div>  
+{% endblock %}

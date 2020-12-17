@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tarea{% endblock %}
+
+{% block content %}
+
+    <div class="container" style = "background: white; width:400px; border-radius: 15px; box-shadow: 10px 10px 5px grey; text-align: center;">
+        <br>
+        <h1 style = "font-family: Helvetica; color:darkslategray; text-align: center; ">Crear Funcion</h1>
+      
+          <div id="content-centro" > 
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <br>
+                
+                <label for="">Nombre</label><br>
+                <input type="text" name="nombre" size="20" style="width:250px;" required>
+                <br>
+                <label for="">Fecha de Inicio</label><br>
+                <input type="date" name="fecha_inicio" style="width:250px;" required>
+                <br>
+                <label for="">Fecha de Termino</label><br>
+                <input type="date" name="fecha_termino" style="width:250px;" required>
+                <br>
+                <label for="">Unidad</label><br>
+                <select name="Unidad" id="DEPARTAMENTO" style="width:250px;" required> 
+                    <option value="">Seleccionar</option>
+                    {% for p in id_unidad %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>   
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="">Estado</label><br>
+                <select name="Estado" id="DESCRIPCION" style="width:250px;" required>
+                    <option value="">Seleccionar</option>
+                    {% for p in id_estado %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>   
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="">Usuario</label><br>
+                <select name="Usuario" id="NOMBRE" style="width:250px;" required>
+                    <option value="">Seleccionar</option>
+                    {% for p in id_usuario %}
+                        <option value="{{p.0}}">{{ p.1 }}</option>   
+                    {% endfor %}
+                </select>
+                
+                <br>
+                <br>
+                <button type="submit" class="btn btn-primary" style="width:250px;" >Guardar</button>
+                <br>
+                <br>
+            </form>   
+            {{mensaje}}
+    
+            
+
+
+          </div>
+        </div>
+      </div>  
+{% endblock %}

@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admintask</title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base-css.css' %}" th:href="@{/css/base..css}">
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Logo  -->
+    <nav id="sidebar">
+      <a class="navbar-brand">
+          <img class= "logo" src="{% static 'img/logo2.png' %}" width="141" height="50" alt="">
+      </a>
+
+      <ul class="list-unstyled components">
+      <!-- Usuario  -->
+          <div>
+              <div class="col-12 user-img">
+                  <img src="{% static 'img/user.png' %}" th:src="@{/img/user.png}"/>
+              </div>
+              <p style="text-align: center;"><b>{{request.user.username}}</b> 
+              </p>
+          </div>
+          <!-- Inicio  --> 
+          <li>
+              <a href="{% url 'iniciointerior' %}">Inicio</a>
+          </li>
+
+          <!-- Unidades  --> 
+          <li>
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Unidades</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3%}
+                  <li>
+                      <a href="{% url 'crear_unidad' %}">Crear unidad</a>
+                  </li>
+                {% endif %}
+                {% endif %}
+                  <li>
+                      <a href="{% url 'listar_unidades' %}">Listar unidades</a>
+                  </li>
+                  
+              </ul>
+          </li>
+
+          <!-- Funciones  --> 
+          <li>
+              <a href="#pageFuncionesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Funciones</a>
+              <ul class="collapse list-unstyled" id="pageFuncionesSubmenu">
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
+                  <li>
+                      <a href="{% url 'crear_funcion' %}">Crear función</a>
+                  </li>
+                {% endif %}
+                {% endif %} 
+                  <li>
+                      <a href="{% url 'listar_funcion' %}">Listar funciones</a>
+                  </li>
+              </ul>
+          </li>
+
+          <!-- Tareas  --> 
+          <li>
+              <a href="#pageTareasSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Tareas</a>
+              <ul class="collapse list-unstyled" id="pageTareasSubmenu">
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
+                  <li>
+                      <a href="{% url 'tarea' %}">Crear tarea</a>
+                  </li>
+                {% endif %}
+                {% endif %}
+                  <li>
+                      <a href="{% url 'listartarea' %}">Listar tareas</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'subtareas' %}">Subtareas</a>
+                </li>
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
+                  <li>
+                      <a href="{% url 'tareas_atrasadas' %}">Tareas por Vencer y Vencidas</a>
+                  </li>
+                {% endif %}
+                {% endif %}
+                  <!--<li>
+                      <a href="#">Home 3</a>
+                  </li>-->
+              </ul>
+          </li>
+
+          <!-- Procesos  --> 
+          <li>
+            <a href="#pageProcesosSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Procesos</a>
+            <ul class="collapse list-unstyled" id="pageProcesosSubmenu">
+                {% if user.is_authenticated %}
+                {% if user.is_rol != 3 %}
+                <li>
+                    <a href="{% url 'crear_procesos' %}">Crear proceso</a>
+                </li>
+                
+                {% endif %}
+                {% endif %}
+                <li>
+                    <a href="{% url 'listar_procesos' %}">Listar procesos</a>
+                </li>
+                <!--<li>
+                    <a href="#">Home 3</a>
+                </li>-->
+            </ul>
+        </li>
+
+          <!-- Cerrar sesión  --> 
+          <li>
+              <a href="/logout">Cerrar sesión</a>
+          </li>
+      </ul>
+      <!--<div>
+        {% block buscador %}
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+        </form>
+        {% endblock buscador %}
+      </div>-->
+      <br>
+    </nav>      
+    <br>
+  
+
+  <div id="content">
+    {% if user.is_authenticated %}
+    {% if user.is_superuser or user.is_staff %}
+    {% block content %}
+
+    {% endblock %}
+    {% else %}
+      <p> No tienes autorización para esta sección </p>
+    {% endif %}
+    
+    {% else %}
+      <p> Aún no iniciaste sesion </p>
+      <a href="{% url 'login' %}"> Ingresar </a> | <a href="{% url 'register' %}">Registrarse</a>
+    
+    {% endif %}
+
+  </div>
+</div>
+</body>
+
+
